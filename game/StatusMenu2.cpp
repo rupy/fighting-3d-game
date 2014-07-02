@@ -1,0 +1,132 @@
+#include "StatusMenu2.h"
+#include "Error.h"
+
+StatusMenu::StatusMenu(Party* party)
+:backGround(800,600),partydata(party),
+numGold(25,0,0,D3DXVECTOR3(650,70,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+strName1(D3DXVECTOR3(100,480,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,0),1,0,5,0,0,_T("主人公")),
+strName2(D3DXVECTOR3(460,480,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("女の子")),
+strName3(D3DXVECTOR3(100,280,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("男の子")),
+strName4(D3DXVECTOR3(460,280,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("お友達")),
+strLv1(D3DXVECTOR3(100,430,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("Lv.")),
+strLv2(D3DXVECTOR3(460,430,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("Lv.")),
+strLv3(D3DXVECTOR3(100,230,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("Lv.")),
+strLv4(D3DXVECTOR3(460,230,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("Lv.")),
+strHP1(D3DXVECTOR3(200,480,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("HP")),
+strHP2(D3DXVECTOR3(560,480,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("HP")),
+strHP3(D3DXVECTOR3(200,280,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("HP")),
+strHP4(D3DXVECTOR3(560,280,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("HP")),
+strPP1(D3DXVECTOR3(200,430,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("PP")),
+strPP2(D3DXVECTOR3(560,430,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("PP")),
+strPP3(D3DXVECTOR3(200,230,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("PP")),
+strPP4(D3DXVECTOR3(560,230,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("PP")),
+strHPsep1(D3DXVECTOR3(300,480,0),780,15,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("/")),
+strHPsep2(D3DXVECTOR3(660,480,0),780,15,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("/")),
+strHPsep3(D3DXVECTOR3(300,280,0),780,15,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("/")),
+strHPsep4(D3DXVECTOR3(660,280,0),780,15,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("/")),
+strPPsep1(D3DXVECTOR3(300,430,0),780,15,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("/")),
+strPPsep2(D3DXVECTOR3(660,430,0),780,15,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("/")),
+strPPsep3(D3DXVECTOR3(300,230,0),780,15,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("/")),
+strPPsep4(D3DXVECTOR3(660,230,0),780,15,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("/")),
+strGold(D3DXVECTOR3(730,70,0),780,25,0,D3DXCOLOR(1.0f,1.0f,1.0f,1.0f),1,0,5,0,0,_T("G")),
+numLv1(25,0,0,D3DXVECTOR3(150,430,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numLv2(25,0,0,D3DXVECTOR3(510,430,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numLv3(25,0,0,D3DXVECTOR3(150,230,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numLv4(25,0,0,D3DXVECTOR3(510,230,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numHP1(15,0,0,D3DXVECTOR3(250,480,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numHP2(15,0,0,D3DXVECTOR3(610,480,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numHP3(15,0,0,D3DXVECTOR3(250,280,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numHP4(15,0,0,D3DXVECTOR3(610,280,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numPP1(15,0,0,D3DXVECTOR3(250,430,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numPP2(15,0,0,D3DXVECTOR3(610,430,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numPP3(15,0,0,D3DXVECTOR3(250,230,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numPP4(15,0,0,D3DXVECTOR3(610,230,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numMaxHP1(15,0,0,D3DXVECTOR3(320,480,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numMaxHP2(15,0,0,D3DXVECTOR3(680,480,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numMaxHP3(15,0,0,D3DXVECTOR3(320,280,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numMaxHP4(15,0,0,D3DXVECTOR3(680,280,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numMaxPP1(15,0,0,D3DXVECTOR3(320,430,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numMaxPP2(15,0,0,D3DXVECTOR3(680,430,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numMaxPP3(15,0,0,D3DXVECTOR3(320,230,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)),
+numMaxPP4(15,0,0,D3DXVECTOR3(680,230,0),D3DXCOLOR(1.0f,1.0f,1.0f,1.0f))
+{
+
+	if(FAILED(backGround.SetupTexture("picture/status.jpg"))){
+		return;
+	}
+}
+StatusMenu::~StatusMenu(){
+}
+void StatusMenu::SetData(){
+	numGold.SetNumber(partydata->GetMoney());
+	numLv1.SetNumber(partydata->member1.GetLevel());
+	numLv2.SetNumber(partydata->member2.GetLevel());
+	numLv3.SetNumber(partydata->member3.GetLevel());
+	numLv4.SetNumber(partydata->member4.GetLevel());
+	numHP1.SetNumber(partydata->member1.GetHP());
+	numHP2.SetNumber(partydata->member2.GetHP());
+	numHP3.SetNumber(partydata->member3.GetHP());
+	numHP4.SetNumber(partydata->member4.GetHP());
+	numPP1.SetNumber(partydata->member1.GetMP());
+	numPP2.SetNumber(partydata->member2.GetMP());
+	numPP3.SetNumber(partydata->member3.GetMP());
+	numPP4.SetNumber(partydata->member4.GetMP());
+	numMaxHP1.SetNumber(partydata->member1.GetMaxHP());
+	numMaxHP2.SetNumber(partydata->member2.GetMaxHP());
+	numMaxHP3.SetNumber(partydata->member3.GetMaxHP());
+	numMaxHP4.SetNumber(partydata->member4.GetMaxHP());
+	numMaxPP1.SetNumber(partydata->member1.GetMaxMP());
+	numMaxPP2.SetNumber(partydata->member2.GetMaxMP());
+	numMaxPP3.SetNumber(partydata->member3.GetMaxMP());
+	numMaxPP4.SetNumber(partydata->member4.GetMaxMP());
+}
+
+void StatusMenu::Appear(){
+	backGround.Appear();
+	numGold.Appear();
+	strLv1.Appear();
+	strLv2.Appear();
+	strLv3.Appear();
+	strLv4.Appear();
+	strName1.Appear();
+	strName2.Appear();
+	strName3.Appear();
+	strName4.Appear();
+	strHP1.Appear();
+	strHP2.Appear();
+	strHP3.Appear();
+	strHP4.Appear();
+	strPP1.Appear();
+	strPP2.Appear();
+	strPP3.Appear();
+	strPP4.Appear();
+	strHPsep1.Appear();
+	strHPsep2.Appear();
+	strHPsep3.Appear();
+	strHPsep4.Appear();
+	strPPsep1.Appear();
+	strPPsep2.Appear();
+	strPPsep3.Appear();
+	strPPsep4.Appear();
+	strGold.Appear();
+	numLv1.Appear();
+	numLv2.Appear();
+	numLv3.Appear();
+	numLv4.Appear();
+	numHP1.Appear();
+	numHP2.Appear();
+	numHP3.Appear();
+	numHP4.Appear();
+	numPP1.Appear();
+	numPP2.Appear();
+	numPP3.Appear();
+	numPP4.Appear();
+	numMaxHP1.Appear();
+	numMaxHP2.Appear();
+	numMaxHP3.Appear();
+	numMaxHP4.Appear();
+	numMaxPP1.Appear();
+	numMaxPP2.Appear();
+	numMaxPP3.Appear();
+	numMaxPP4.Appear();
+}
